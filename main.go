@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"os"
@@ -31,6 +32,11 @@ func validate() error {
 	return nil
 }
 
+func loadParams() {
+	flag.StringVar(&filePath, "f", "files/下载1.jpeg", "Please entry file path")
+	flag.Parse()
+}
+
 func upload(filePath string) error {
 	bucket, err := client.Bucket(conf.OssBucket)
 	if err != nil {
@@ -40,7 +46,7 @@ func upload(filePath string) error {
 }
 
 func main() {
-	filePath = "files/下载1.jpeg"
+	loadParams()
 	if err := validate(); err != nil {
 		fmt.Printf("params is missing")
 		os.Exit(1)
