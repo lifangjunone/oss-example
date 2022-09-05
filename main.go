@@ -37,11 +37,12 @@ func validate() error {
 
 // loadParams
 func loadParams() {
-	flag.StringVar(&filePath, "f", "files/下载1.jpeg", "Please entry file path")
+	flag.StringVar(&filePath, "f", "", "Please entry file path")
 	flag.BoolVar(&help, "h", false, "Print help info")
 	flag.Parse()
 	if help {
 		usage()
+		os.Exit(0)
 	}
 }
 
